@@ -6,4 +6,9 @@
         INSERT INTO USERS (ID, USERNAME, PASSWORD)
         VALUES (SEQ_USERS.NEXTVAL, #{username}, #{password})
     </insert>
+
+    <select id="findById" parameterType="User">
+        SELECT * FROM USERS
+        WHERE ID = #{id}
+    </select>
 </mapper>
