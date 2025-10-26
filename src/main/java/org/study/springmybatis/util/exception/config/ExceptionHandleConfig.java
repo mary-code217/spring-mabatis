@@ -1,27 +1,28 @@
 package org.study.springmybatis.util.exception.config;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.study.springmybatis.util.exception.UserNotFoundException;
+import org.study.springmybatis.util.exception.NotFoundException;
 
-import java.time.Instant;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class ExceptionHandleConfig extends RuntimeException{
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String,Object>> handleUserNotFoundException(UserNotFoundException e, HttpServletRequest req){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-                "status", 400,
-                "error", "BAD_REQUEST",
-                "message", e.getMessage(),
-                "path", req.getRequestURI(),
-                "timestamp", Instant.now().toString()
-        ));
+    @ExceptionHandler(NotFoundException.class)
+    public ProblemDetail handleUserNotFoundException(NotFoundException e){
+        return getProblemDetail(HttpStatus.NOT_FOUND, e);
+    }
+
+    private static ProblemDetail getProblemDetail(HttpStatus status, Exception e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, e.getMessage());
+
+        problemDetail.setProperty("timestamp", LocalDateTime.now());
+        problemDetail.setProperty("exception", e.getClass().getSimpleName());
+
+        return problemDetail;
     }
 
 }

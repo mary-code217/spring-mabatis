@@ -6,7 +6,7 @@ import org.study.springmybatis.domain.user.dto.UserDetailResponse;
 import org.study.springmybatis.domain.user.dto.UserSaveRequest;
 import org.study.springmybatis.domain.user.entity.User;
 import org.study.springmybatis.domain.user.repository.UserRepositoryImpl;
-import org.study.springmybatis.util.exception.UserNotFoundException;
+import org.study.springmybatis.util.exception.NotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class UserService {
 
     public UserDetailResponse findById(Long id) {
         User findUser = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
+                .orElseThrow(() -> new NotFoundException("User Not Found"));
 
         return UserDetailResponse.of(findUser.getId(), findUser.getUsername());
     }
