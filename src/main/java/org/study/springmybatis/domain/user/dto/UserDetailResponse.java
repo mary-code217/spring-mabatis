@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 public class UserDetailResponse {
     private Long id;
+
     private String username;
 
     public static UserDetailResponse of(Long id, String username){

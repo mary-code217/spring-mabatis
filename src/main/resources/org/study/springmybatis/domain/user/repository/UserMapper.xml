@@ -11,4 +11,9 @@
         SELECT * FROM USERS
         WHERE ID = #{id}
     </select>
+
+    <select id="findByUsername" parameterType="User">
+        SELECT * FROM USERS
+        WHERE USERNAME = #{username}
+    </select>
 </mapper>

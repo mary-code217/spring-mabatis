@@ -2,6 +2,7 @@ package org.study.springmybatis.domain.user.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.study.springmybatis.common.exception.config.DuplicateException;
 import org.study.springmybatis.domain.user.entity.User;
 
 import java.util.Optional;
@@ -20,7 +21,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findById(Long id) {
-        Optional<User> findUser =  userMapper.findById(id);
-        return findUser;
+        return userMapper.findById(id);
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userMapper.findByUsername(username);
     }
 }

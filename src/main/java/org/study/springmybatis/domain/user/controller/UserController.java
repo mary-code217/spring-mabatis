@@ -1,13 +1,13 @@
 package org.study.springmybatis.domain.user.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.study.springmybatis.domain.user.dto.UserDetailResponse;
-import org.study.springmybatis.domain.user.dto.UserSaveRequest;
-import org.study.springmybatis.domain.user.entity.User;
+import org.study.springmybatis.domain.user.dto.UserCreateRequest;
 import org.study.springmybatis.domain.user.service.UserService;
 
 @Tag(name = "User API", description = "유저 도메인 API")
@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping()
-    public ResponseEntity<?> saveUser(@RequestBody UserSaveRequest request) {
+    public ResponseEntity<?> saveUser(@RequestBody @Valid UserCreateRequest request) {
 
         userService.saveUser(request);
 

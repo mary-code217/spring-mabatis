@@ -1,4 +1,4 @@
-package org.study.springmybatis.util.exception;
+package org.study.springmybatis.common.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message){
