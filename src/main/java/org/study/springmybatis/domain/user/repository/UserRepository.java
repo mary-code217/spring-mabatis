@@ -1,13 +1,27 @@
 package org.study.springmybatis.domain.user.repository;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.study.springmybatis.domain.user.entity.User;
 
 import java.util.Optional;
 
-public interface UserRepository {
-    User save(User user);
+@Repository
+@RequiredArgsConstructor
+public class UserRepository {
 
-    Optional<User> findById(Long id);
+    private final UserMapper userMapper;
 
-    Optional<User> findByUsername(String username);
+    public User save(User user) {
+        userMapper.save(user);
+        return user;
+    }
+
+    public Optional<User> findById(Long id) {
+        return userMapper.findById(id);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userMapper.findByUsername(username);
+    }
 }

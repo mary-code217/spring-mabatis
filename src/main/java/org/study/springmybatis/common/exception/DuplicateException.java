@@ -1,4 +1,4 @@
-package org.study.springmybatis.common.exception.config;
+package org.study.springmybatis.common.exception;
 
 public class DuplicateException extends RuntimeException{
     public DuplicateException(String message){
